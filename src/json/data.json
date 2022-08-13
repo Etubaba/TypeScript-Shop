@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "name": "Air Max",
+        "price": "300",
+        "image": "/assets/shoes8.png"
+    },
+    {
+        "id": 2,
+        "name": "Odogwu",
+        "price": "500",
+        "image": "/assets/shoes9.png"
+    },
+    {
+        "id": 3,
+        "name": "Milutus",
+        "price": "300",
+        "image": "/assets/shoes10.png"
+    },
+    {
+        "id": 4,
+        "name": "Lamba",
+        "price": "900",
+        "image": "/assets/shoes11.png"
+    },
+    {
+        "id": 5,
+        "name": "Dogo",
+        "price": "500",
+        "image": "/assets/shoes12.png"
+    },
+    {
+        "id": 6,
+        "name": "Air Mush",
+        "price": "400",
+        "image": "/assets/shoes13.png"
+    },
+    {
+        "id": 7,
+        "name": "Delanus",
+        "price": "800",
+        "image": "/assets/shoes14.png"
+    },
+    {
+        "id": 8,
+        "name": "Solunus",
+        "price": "500",
+        "image": "/assets/shoes15.png"
+    },
+    {
+        "id": 9,
+        "name": "Max",
+        "price": "300",
+        "image": "/assets/shoes17.png"
+    },
+    {
+        "id": 10,
+        "name": "Sub mou",
+        "price": "300",
+        "image": "/assets/sup.png"
+    },
+    {
+        "id": 11,
+        "name": "Wave",
+        "price": "300",
+        "image": "/assets/wave1.png"
+    },
+    {
+        "id": 12,
+        "name": "Gorjus",
+        "price": "300",
+        "image": "/assets/shoes10.png"
+    }
+]
