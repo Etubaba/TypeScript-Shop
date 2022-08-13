@@ -1,18 +1,19 @@
 import React from "react";
 import {AiOutlineSearch, AiOutlineShoppingCart} from "react-icons/ai"
+import {Link} from "react-router-dom"
 
 
 function Nav() {
   return (
-    <div className="flex py-4 items-center text-white px-10 justify-between">
-      <h1 className="text-4xl">EtuX</h1>
+    <div className="flex bg-[#272b34] py-4 sticky z-50 top-0 items-center text-white px-10 justify-between">
+      <Link to='/'><h1 className="text-4xl">EtuX</h1></Link>
       <div className="flex text-xl mr-28 space-x-16">
-        <p>Home</p>
+       <Link to='/'><p>Home</p></Link>
         <p>About us</p>
         <p>Contact Us </p>
 
         <div className='flex space-x-5'>
-          <AiOutlineShoppingCart/>
+        <Link to='/cart' ><AiOutlineShoppingCart/></Link> 
           <AiOutlineSearch/>
         </div>
       </div>
