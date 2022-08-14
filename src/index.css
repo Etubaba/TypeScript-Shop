@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+/* menu for mobile */
+.line-top {
+    transform: translateY(-7px);
+    transition: transform .25s, opacity .35s;
+}
+
+.line-bottom {
+    transform: translateY(7px);
+    transition: transform .25s, opacity .35s;
+}
+
+#checkbox:checked~.line-bottom {
+    transform: rotate(-45deg);
+}
+
+#checkbox:checked~.line-top {
+    transform: rotate(45deg);
+}
+
+#checkbox:checked~.line-middle {
+    transform: rotate(16px);
+    opacity: 0;
+}
+
+
+.animate-slide-in {
+    animation: slide-in 0.5s ease-out;
+    
+}
+@keyframes slide-in {
+    0% {
+        -webkit-transform: translateX(-200px);
+        transform: translateX(-200px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+}
+

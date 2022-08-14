@@ -2,6 +2,7 @@ import React from "react"
 import { Route, Routes } from "react-router-dom"
 
 import Card from "./components/Card"
+import MobileNav from "./components/MobileNav"
 import Nav from "./components/Nav"
 import Cart from "./pages/Cart"
 import CheckOut from "./pages/CheckOut"
@@ -19,6 +20,7 @@ const App:React.FC=() =>{
   return (
     <div className="bg-[#272b34] pb-20">
     <Nav/>
+    <MobileNav/>
     <p className="text-[10vw] text-[#2d343e] z-[0] left-[30%] absolute top-[7%]">TS-Shop</p>
    
     <Routes>
