@@ -9,6 +9,7 @@ import Details from "./pages/Details"
 import Login from "./pages/Login"
 import MainCompo from "./pages/MainCompo"
 import Register from "./pages/Register"
+import Search from "./pages/Search"
 
 
 const App:React.FC=() =>{
@@ -18,7 +19,7 @@ const App:React.FC=() =>{
   return (
     <div className="bg-[#272b34] pb-20">
     <Nav/>
-    <p className="text-[10vw] text-[#2d343e] z-0  left-[30%] absolute top-[7%]">TS-Shop</p>
+    <p className="text-[10vw] text-[#2d343e] z-[0] left-[30%] absolute top-[7%]">TS-Shop</p>
    
     <Routes>
       <Route path="/" element={<MainCompo/>}/>
@@ -27,6 +28,7 @@ const App:React.FC=() =>{
       <Route path="/login" element={<Login/>}/>
       <Route path="/details" element={<Details/>}/>
       <Route path="/checkout" element={<CheckOut/>}/>
+      <Route path="/search" element={<Search/>}/>
     </Routes>
 
 

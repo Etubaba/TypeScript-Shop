@@ -14,7 +14,7 @@ const Cart = () => {
   return (
     <div className=''>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="md:max-w-5xl mx-5 md:mx-auto">
         <div className="flex justify-between mt-5">
           <span
           
@@ -39,7 +39,7 @@ const Cart = () => {
           )}
         </div>
 
-        <div className="w-full bg-[#2B3039] text-gray-300 my-5 py-1 rounded-2xl h-auto">
+        <div className="w-full bg-[#2B3039] shadow-md text-gray-300 my-5 py-1 rounded-2xl h-auto">
           {/* cart items  */}
           {cartList.length === 0 ? (
             <div className="h-full px-2 lg:px-0 ">
