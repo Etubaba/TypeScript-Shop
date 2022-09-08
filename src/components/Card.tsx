@@ -1,20 +1,22 @@
 import React from 'react'
 
 type shopstuffs={
-  id:number,
-  name: string,
+  _id:string,
+  productName: string,
   image: string,
-  price: string,
+  price: number,
+  rating?: number,
+  description?: string
   
 }
 
 
 
-const Card= ({id,name,image,price}:shopstuffs) => {
+const Card= ({_id,productName,image,price}:shopstuffs) => {
   return (
-    <div key={id} className="bg-[#2B3039] p-3  rounded-lg w-full cursor-pointer">
+    <div key={_id} className="bg-[#2B3039] p-3  rounded-lg w-full cursor-pointer">
       <img
-        src={`${image}`}
+        src={`data:image/png;base64,${image}`}
         alt=""
         className={
           "object-fill rounded-md w-full h-48 md:h-48"
@@ -27,7 +29,7 @@ const Card= ({id,name,image,price}:shopstuffs) => {
 
      
       <span className="text-base text-gray-300 flex justify-between items-center ">
-        <p className="font-bold my-1">{name}</p>
+        <p className="font-bold my-1">{productName}</p>
         <span className="flex">
        
          ${price}
