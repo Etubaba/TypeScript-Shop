@@ -16,7 +16,7 @@ interface IInitialState {
 }
 
 const initialState:IInitialState = {
-    isLoggedIn:localStorage.getItem('login')?true : false,
+    isLoggedIn:localStorage.getItem('login')=='true'?true : false,
     
     userData: null
 }
@@ -30,6 +30,8 @@ export const shopSlice = createSlice({
         },
         userProps:(state,action:PayloadAction<IUser | null>)=>{
             state.userData=action.payload
+            state.isLoggedIn=true
+              localStorage.setItem('login','true')
             localStorage.setItem('user',JSON.stringify(state.userData))
         }
     }

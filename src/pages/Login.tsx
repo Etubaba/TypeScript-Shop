@@ -5,6 +5,8 @@ import { BASE_URL } from '../json/api'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../features/store'
 import { userProps } from '../features/shopSlice'
+import { useNavigate } from 'react-router-dom'
+
 
 
 const Login = () => {
@@ -16,6 +18,7 @@ const Login = () => {
 
   //const dispatch:() => AppDispatch=useDispatch
   const dispatch=useDispatch()
+  const navigate=useNavigate()
 
 
   const submit = (): void => {
@@ -39,8 +42,10 @@ const Login = () => {
         .then(res => {
           if (res.data.status) {
             dispatch(userProps(res.data.data));
+            navigate('/')
+            alert('login successful')
           }
-        })
+        }).catch(err => {console.log(err)});
     }
   }
 
@@ -55,18 +60,19 @@ const Login = () => {
         <p className='text-gray-300 font-semibold'>Sign In</p>
         <div>
           <label className='text-gray-300' htmlFor='user'>Username</label>
-          <input className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='user' />
+          <input value={user} onChange={(e) => setUser(e.target.value)} className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='user' />
         </div>
 
         <div>
           <label className='text-gray-300' htmlFor='pass'>Password</label>
-          <input className="w-full outline-none p-2 text-white bg-[#272b34]" type='text' id='pass' />
+          <input value={password} onChange={(e) => setPassword(e.target.value)}
+           className="w-full outline-none p-2 text-white bg-[#272b34]" type='text' id='pass' />
         </div>
 
 
-        <div className='flex justify-end items-end'>
+        <div    className='flex justify-end items-end'>
           <button
-            onClick={submit}
+            onClick={submit} 
             className="px-4 py-2 text-white  rounded-md shadow bg-[#374151]">
             Login
           </button>
