@@ -37,9 +37,9 @@ const MainCompo = () => {
   
   return (
       <div className="grid z-50 gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mx-5 md:mx-auto mt-24  md:max-w-5xl">
-      {products.map((item)=>
+      {products.map((item ,idx)=>
       <div>
-        <Card {...item} />
+        <Card key={idx} {...item} />
       </div>)}
 
     </div>

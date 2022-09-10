@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 
 type IUser ={
@@ -28,7 +28,7 @@ export const shopSlice = createSlice({
             state.isLoggedIn=action.payload
             localStorage.setItem('login','true')
         },
-        user:(state,action:PayloadAction<IUser | null>)=>{
+        userProps:(state,action:PayloadAction<IUser | null>)=>{
             state.userData=action.payload
             localStorage.setItem('user',JSON.stringify(state.userData))
         }
@@ -37,12 +37,12 @@ export const shopSlice = createSlice({
 
 
 
-export const { handleLogin,user}=shopSlice.actions
+export const { handleLogin,userProps}=shopSlice.actions
 
 
 export default shopSlice.reducer
 
 
 
-export const userDetails =useSelector((state:RootState)=>state.shop.userData)
-export const loginState=useSelector((state:RootState)=>state.shop.isLoggedIn)
+// export const userDetails =useSelector((state:RootState)=>state.shop.userData)
+// export const loginState=useSelector((state:RootState)=>state.shop.isLoggedIn)
