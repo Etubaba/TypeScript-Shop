@@ -14,12 +14,14 @@ type IUser ={
 interface IInitialState {
     isLoggedIn: boolean;
     userData: IUser | null;
+    productId: string;
 }
 
 const initialState:IInitialState = {
     isLoggedIn: false,
     
-    userData: null
+    userData: null,
+    productId:''
 }
 export const shopSlice = createSlice({
     name:'shop',
@@ -32,15 +34,19 @@ export const shopSlice = createSlice({
         userProps:(state,action:PayloadAction<IUser | null>)=>{
             state.userData=action.payload
             state.isLoggedIn=true
-              localStorage.setItem('login','true')
+            localStorage.setItem('login','true')
             localStorage.setItem('user',JSON.stringify(state.userData))
+        },
+        productDetails: (state,action:PayloadAction<string>)=>{
+            state.productId = action.payload
+            localStorage.setItem('id',state.productId)
         }
     }
 })
 
 
 
-export const { handleLogin,userProps}=shopSlice.actions
+export const { handleLogin,userProps,productDetails}=shopSlice.actions
 
 
 export default shopSlice.reducer

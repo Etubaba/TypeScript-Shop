@@ -1,6 +1,7 @@
 import React from "react";
 import {AiOutlineSearch, AiOutlineShoppingCart} from "react-icons/ai"
 import {BsPersonCircle} from "react-icons/bs"
+import {MdLogin} from "react-icons/md"
 import { useSelector } from "react-redux";
 import {Link} from "react-router-dom"
 import { RootState } from "../features/store";
@@ -20,7 +21,7 @@ function Nav() {
         <div className='flex mt-1 space-x-5'>
         <Link to='/cart' ><AiOutlineShoppingCart/></Link> 
          <Link to='/search'><AiOutlineSearch/></Link> 
-      {!login&&   <Link to='/login'><BsPersonCircle/></Link> }
+      {!login?<Link to='/login'><MdLogin/></Link> :  <BsPersonCircle/> }
         </div>
       </div>
     </div>

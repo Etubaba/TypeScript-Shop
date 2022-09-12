@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { productDetails } from '../features/shopSlice'
 import { RootState } from '../features/store'
 import { BASE_URL } from '../json/api'
 
@@ -21,6 +22,7 @@ const Card = ({ _id, productName, image, price }: shopstuffs) => {
 
   const user = useSelector((state: RootState) => state.shop.userData)
   const navigate = useNavigate()
+  const dispatch=useDispatch()
 
 
   const addToCart = (): void => {
@@ -48,12 +50,12 @@ const Card = ({ _id, productName, image, price }: shopstuffs) => {
         src={`data:image/png;base64,${image}`}
         alt=""
         className={
-          "object-fill rounded-md w-full h-48 md:h-48"
+          "duration-300  hover:-translate-y-1 hover:scale-110 transition ease-in-out delay-150    object-fill rounded-md hover:skew-y-6 w-full h-48 md:h-48"
         }
-      // onClick={() => {
-      //   dispatch(catClicked(item.id));
-      //   router.push("/categoryproducts");
-      // }}
+      onClick={() => {
+        dispatch(productDetails(_id));
+        navigate("/details");
+      }}
       />
 
 
