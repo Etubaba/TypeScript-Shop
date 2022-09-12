@@ -1,7 +1,48 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import React,{useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../json/api'
 
 const Register = () => {
+const [username,setUsername] = useState('')
+const [email,setEmail] = useState('')
+const [password,setPassword] = useState('')
+
+  const navigate=useNavigate()
+
+  const submit = (): void => {
+    if (username === '' || password === '' || password === '') {
+      alert('Please enter a password')
+    } else {
+      type loginData = {
+        password: string,
+        email?: string,
+        username?: string,
+      }
+      const data: loginData = {
+        password,
+        username,
+        email,
+      }
+      axios.post(`${BASE_URL}register`, data)
+        .then(res => {
+          if (res.data.status) {
+          
+            navigate('/login')
+            alert('Registration successful')
+            setPassword('')
+            setUsername('')
+            setEmail('')
+          }
+        }).catch(err => {console.log(err)});
+    }
+  }
+
+
+
+
+
   return (
     <div className="h-screen flex justify-center items-center">
 
@@ -9,16 +50,24 @@ const Register = () => {
   <p className='text-gray-300 font-semibold'>Sign up</p>
   <div>
     <label className='text-gray-300' htmlFor='user'>Username</label>
-    <input className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='user'/>
+    <input value={username} onChange={(e)=>setUsername(e.target.value)} className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='user'/>
   </div>
   <div>
     <label className='text-gray-300' htmlFor='email'>Email</label>
-    <input className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='email'/>
+    <input  value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full p-2 outline-none text-white bg-[#272b34]" type='text' id='email'/>
   </div>
   <div>
     <label className='text-gray-300' htmlFor='pass'>Password</label>
-    <input className="w-full outline-none p-2 text-white bg-[#272b34]" type='text' id='pass'/>
+    <input  value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full outline-none p-2 text-white bg-[#272b34]" type='text' id='pass'/>
   </div>
+
+   <div    className='flex justify-end items-end'>
+          <button
+           onClick={submit} 
+            className="px-4 py-2 text-white  rounded-md shadow bg-[#374151]">
+            Register
+          </button>
+        </div>
 
   <span className='text-gray-300'>Already have an account?  <Link to='/login'><strong>Sign In</strong> </Link></span>
 

@@ -5,6 +5,7 @@ import type { RootState } from './store'
 
 
 type IUser ={
+    _id: string,
     password: string,
     username: string,
     email: string
@@ -16,7 +17,7 @@ interface IInitialState {
 }
 
 const initialState:IInitialState = {
-    isLoggedIn:localStorage.getItem('login')=='true'?true : false,
+    isLoggedIn: false,
     
     userData: null
 }
