@@ -1,23 +1,83 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {IoIosArrowForward} from 'react-icons/io'
 import{MdKeyboardBackspace } from 'react-icons/md'
 import{GiShoppingCart } from 'react-icons/gi'
 import{RiDeleteBin6Line} from 'react-icons/ri' 
 import{BsFillCartXFill,BsCartFill} from 'react-icons/bs'
+import { RootState } from '../features/store'
+import { useSelector } from 'react-redux'
+import { BASE_URL } from '../json/api'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-
+interface ICart {
+  _id: string,
+  useId: string,
+  productId: string,
+  productName: string,
+  price: number,
+  image: string,
+}
 
 
 const Cart = () => {
+    const [cartList, setCartList] = useState<ICart[]>([])
+   // const[cartId,setCartId]=useState<string>('')
 
-  const cartList:number[]=[1,2]
+
+  const user = useSelector((state: RootState) => state.shop.userData)
+  const navigate= useNavigate()
+
+  useEffect(() => {
+
+
+    const getCart = async (): Promise<void> => {
+      if (user)
+       await axios.get(`${BASE_URL}user/cart/${user._id}`)
+          .then(res => setCartList(res.data.data))
+
+    }
+
+    getCart()
+  }, [])
+
+const totalPrice:number=cartList?.reduce((acc,cart)=>{
+  acc += cart.price;
+  return acc
+
+},0 )
+
+const clearCart =async ():Promise<void> =>{
+await axios.post(`${BASE_URL}clear/user/cart/${user?._id}`,{})
+.then(res=>{
+  if(res.data.status){
+    alert('Cart items cleared successfully')
+  }
+})
+}
+const deleteItem =async (cartId:string):Promise<void> =>{
+await axios.post(`${BASE_URL}delete/cartitem`,
+{
+  userId:user?._id,
+  cartId,
+})
+.then(res=>{
+  if(res.data.status){
+    alert('Cart item deleted successfully')
+  }
+})
+}
+
+
+
+
   return (
     <div className=''>
 
       <div className="md:max-w-5xl mx-5 md:mx-auto">
         <div className="flex justify-between mt-5">
           <span
-          
+          onClick={()=>navigate('-1')}
             className="flex  text-gray-300 hover:text-crystamolPink mt-1 space-x-1"
           >
             <MdKeyboardBackspace className="mt-[0.37rem] text-xs  md:text-lg" />{" "}
@@ -25,7 +85,7 @@ const Cart = () => {
           </span>
           {cartList.length !== 0 ? (
             <span
-              // onClick={clearCart}
+              onClick={clearCart}
               className="text-xs flex space-x-2 hover:text-gray-200  md:text-lg text-gray-300"
             >
               <BsFillCartXFill className="mt-1 text-xs  md:text-lg" />
@@ -67,13 +127,14 @@ const Cart = () => {
                     <div className="flex ">
                       <img
                         alt="eeee"
-                        // src={`${PRODUCT_IMAGE_URL}${cart?.productImage}`}
-                        src='/assets/shoes11.png'
+                      
+                          src={`data:image/png;base64,${cart.image}`}
+                        // src='/assets/shoes11.png'
                         className="object-fill w-36 h-32 md:w-44 mr-5 md:h-36 rounded-md"
                       />
                       <div className="flex flex-col space-y-2 ">
                         <h3 className="text-md   md:text-2xl  mb-2">
-                         Akpo
+                        {cart.productName}
                         </h3>
                         <span className="flex space-x-5">
                           <p className="md:mb-14 text-xs md:text-sm  ">
@@ -89,41 +150,14 @@ const Cart = () => {
                               $
                             </p>
                             <p>
-                             7655
+                            {cart.price}
                             </p>{" "}
                             :
                           </span>
                         </div>
-                        <div className="md:hidden inline-block">
-                          <div className="bg-crystamolBackground flex rounded-lg h-8 w-20  p-2 space-x-3 justify-center items-center ">
-                            <span
-                             
-                               
-                                  // setCartList(newCartList);
-                                
-
-                              
-                                    
-                              className="text-xl cursor-pointer -mt-1 hover:text-crystamolPink"
-                            >
-                              +
-                            </span>
-
-                            <span className="bg-white cursor-pointer px-2 my-1 rounded-md ">
-                            1
-                            </span>
-
-                            <span
-                             
-                                    
-                              className="text-2xl hover:text-crystamolPink -mt-2"
-                            >
-                              -
-                            </span>
-                          </div>
-                        </div>
+                      
                         <span
-                          
+                          onClick={()=>deleteItem(cart._id)}
                           className="flex mt-10 text-gray-300 cursor-pointer hover:text-gray-200 space-x-2"
                         >
                           <RiDeleteBin6Line className="text-md md:text-lg" />
@@ -133,37 +167,14 @@ const Cart = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="hidden md:inline-block">
-                      <div
-                        // onMouseLeave={}
-                        className="bg-crystamolBackground flex rounded-lg h-10 w-24 mt-10 p-2 space-x-3 justify-center items-center "
-                      >
-                        <span
-                         
-                          className="text-xl cursor-pointer -mt-1 hover:text-crystamolPink"
-                        >
-                          +
-                        </span>
-
-                        <span className="bg-white px-2 my-1 rounded-md ">
-                         1
-                        </span>
-
-                        <span
-                         
-                          className="text-2xl cursor-pointer hover:text-crystamolPink -mt-2"
-                        >
-                          -
-                        </span>
-                      </div>
-                    </div>
+                    
                     <div className="text-crystamolPrice hidden md:inline-block mr-5 mt-10 text-lg md:text-3xl font-semibold">
                       <span className="flex">
                         <p>
                          $
                         </p>
                         <p>
-                         60
+                         {cart.price}
                         </p>
                       </span>
                     </div>
@@ -175,22 +186,14 @@ const Cart = () => {
               {/* cart  prices */}
 
               <div className="m-5 space-y-10">
-                <div className="flex justify-between text-sm md:text-lg ">
-                  <p>Subtotal</p>
-
-                  <span className="flex">
-                    <p>$</p>
-                     
-                    <p>54</p>
-                  </span>
-                </div>
+               
                 
                 <div className="flex justify-between text-xl font-semibold">
                   <p>Total</p>
                   <span className="flex">
                     <p>$</p>
                     
-                    <p>655</p>
+                    <p>{totalPrice}</p>
                   </span>
                 </div>
               </div>
@@ -201,10 +204,8 @@ const Cart = () => {
 
               <div className="flex justify-center m-4 md:justify-end md:m-10">
                 <button
-                  // onClick={() => {
-                  //   router.push("/check-out");
-                  //   setLoading(true);
-                  // }}
+                  onClick={()=>navigate('/checkout')}
+                 
                   className="bg-crystamolButton bg-gray-700 hover:bg-gray-600 py-3 px-10 md:px-28 md:py-4 text-white flex rounded-full "
                 >
                  

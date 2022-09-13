@@ -12,16 +12,16 @@ type IUser ={
 }
 
 interface IInitialState {
-    isLoggedIn: boolean;
+    isLoggedIn: boolean|string|null;
     userData: IUser | null;
-    productId: string;
+    productId: string|null;
 }
 
 const initialState:IInitialState = {
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem('id')?localStorage.getItem('id'):false,
     
-    userData: null,
-    productId:''
+    userData: localStorage.getItem('user')?JSON.parse(localStorage.getItem('user') || ''):null,
+    productId:localStorage.getItem('id')?localStorage.getItem('id'):''
 }
 export const shopSlice = createSlice({
     name:'shop',

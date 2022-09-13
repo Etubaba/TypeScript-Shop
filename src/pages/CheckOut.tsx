@@ -32,7 +32,7 @@ const CheckOut = () => {
     getCart()
   }, [])
 
-const totalPrice=cartList?.reduce((acc,cart)=>{
+const totalPrice:number=cartList?.reduce((acc,cart)=>{
   acc += cart.price;
   return acc
 
