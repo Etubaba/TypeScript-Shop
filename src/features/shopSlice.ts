@@ -12,16 +12,16 @@ type IUser ={
 }
 
 interface IInitialState {
-    isLoggedIn: boolean|string|null;
+    isLoggedIn: boolean|null;
     userData: IUser | null;
     productId: string|null;
 }
 
 const initialState:IInitialState = {
-    isLoggedIn: localStorage.getItem('id')?localStorage.getItem('id'):false,
+    isLoggedIn: localStorage.getItem('tslogin')?JSON.parse(localStorage.getItem('tslogin')|| ''):false,
     
-    userData: localStorage.getItem('user')?JSON.parse(localStorage.getItem('user') || ''):null,
-    productId:localStorage.getItem('id')?localStorage.getItem('id'):''
+    userData: localStorage.getItem('tsuser')?JSON.parse(localStorage.getItem('tsuser') || ''):null,
+    productId:localStorage.getItem('tsproduct')?localStorage.getItem('tsproduct'):''
 }
 export const shopSlice = createSlice({
     name:'shop',
@@ -29,17 +29,18 @@ export const shopSlice = createSlice({
     reducers:{
         handleLogin:(state,action:PayloadAction<boolean>)=>{
             state.isLoggedIn=action.payload
-            localStorage.setItem('login','true')
+            localStorage.setItem('tslogin','true')
         },
         userProps:(state,action:PayloadAction<IUser | null>)=>{
             state.userData=action.payload
             state.isLoggedIn=true
-            localStorage.setItem('login','true')
-            localStorage.setItem('user',JSON.stringify(state.userData))
+            //@ts-ignore
+            localStorage.setItem('tslogin',true)
+            localStorage.setItem('tsuser',JSON.stringify(state.userData))
         },
         productDetails: (state,action:PayloadAction<string>)=>{
             state.productId = action.payload
-            localStorage.setItem('id',state.productId)
+            localStorage.setItem('tsproduct',state.productId)
         }
     }
 })

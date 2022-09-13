@@ -21,7 +21,7 @@ const App:React.FC=() =>{
     <div className="bg-[#272b34] pb-20">
     <Nav/>
     <MobileNav/>
-    <p className="text-[10vw] text-[#2d343e] z-[0] left-[30%] absolute top-[7%]">TS-Shop</p>
+    {/* <p className="text-[10vw] text-[#2d343e] z-[0] left-[30%] absolute top-[7%]">TS-Shop</p> */}
    
     <Routes>
       <Route path="/" element={<MainCompo/>}/>
