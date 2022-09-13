@@ -9,6 +9,7 @@ import CheckOut from "./pages/CheckOut"
 import Details from "./pages/Details"
 import Login from "./pages/Login"
 import MainCompo from "./pages/MainCompo"
+import Order from "./pages/Order"
 import Register from "./pages/Register"
 import Search from "./pages/Search"
 
@@ -26,6 +27,7 @@ const App:React.FC=() =>{
     <Routes>
       <Route path="/" element={<MainCompo/>}/>
       <Route path="/cart" element={<Cart/>}/>
+      <Route path="/order" element={<Order/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/details" element={<Details/>}/>

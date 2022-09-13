@@ -29,13 +29,19 @@ export const shopSlice = createSlice({
     reducers:{
         handleLogin:(state,action:PayloadAction<boolean>)=>{
             state.isLoggedIn=action.payload
-            localStorage.setItem('tslogin','true')
+            localStorage.setItem('tslogin',JSON.stringify(state.isLoggedIn))
         },
         userProps:(state,action:PayloadAction<IUser | null>)=>{
             state.userData=action.payload
-            state.isLoggedIn=true
-            //@ts-ignore
-            localStorage.setItem('tslogin',true)
+
+            if(action.payload !== null){
+                 state.isLoggedIn=true
+                    //@ts-ignore
+                  localStorage.setItem('tslogin',true)
+            }
+           
+         
+           
             localStorage.setItem('tsuser',JSON.stringify(state.userData))
         },
         productDetails: (state,action:PayloadAction<string>)=>{
