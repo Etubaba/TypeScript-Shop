@@ -3,17 +3,22 @@ import React,{useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../json/api'
+import { useSnackbar } from 'notistack';
 
 const Register = () => {
 const [username,setUsername] = useState('')
 const [email,setEmail] = useState('')
 const [password,setPassword] = useState('')
 
+const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const navigate=useNavigate()
 
   const submit = (): void => {
     if (username === '' || password === '' || password === '') {
-      alert('Please enter a password')
+      enqueueSnackbar("All fields are required", {
+        variant: "error",
+      });
     } else {
       type loginData = {
         password: string,
@@ -30,12 +35,18 @@ const [password,setPassword] = useState('')
           if (res.data.status) {
           
             navigate('/login')
-            alert('Registration successful')
+           enqueueSnackbar("Registration completed successfully", {
+        variant: "success",
+      });
             setPassword('')
             setUsername('')
             setEmail('')
           }
-        }).catch(err => {console.log(err)});
+        }).catch(err => {
+           enqueueSnackbar("Something went wrong", {
+        variant: "error",
+      });
+          console.log(err)});
     }
   }
 

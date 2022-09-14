@@ -112,7 +112,7 @@ await axios.post(`${BASE_URL}delete/cartitem`,
 
                   <button
                    
-                    className="py-1 lg:py-3 hover:bg-[#0090A0] mt-16 px-8 lg:px-12 rounded-full bg-crystamolButton text-white text-sm lg:text-lg"
+                    className="py-1 lg:py-3  mt-16 px-8 lg:px-12 rounded-full bg-[#374151] text-white text-sm lg:text-lg"
                   >
                     Add to cart
                   </button>

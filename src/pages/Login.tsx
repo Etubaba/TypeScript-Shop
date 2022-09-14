@@ -6,12 +6,16 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../features/store'
 import { userProps } from '../features/shopSlice'
 import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack';
+
 
 
 
 const Login = () => {
   const [user, setUser] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 
 
@@ -23,7 +27,9 @@ const Login = () => {
 
   const submit = (): void => {
     if (user === '' || password === '') {
-      console.log('Please enter a password')
+      enqueueSnackbar("Please,all fields are required", {
+        variant: "error",
+      });
     } else {
       type loginData = {
         password: string,
@@ -43,9 +49,16 @@ const Login = () => {
           if (res.data.status) {
             dispatch(userProps(res.data.data));
             navigate('/')
-            alert('login successful')
+            enqueueSnackbar("You have logged in successfully", {
+        variant: "success",
+      });
           }
-        }).catch(err => {console.log(err)});
+        }).catch(err => {
+          
+           enqueueSnackbar(`${err.message}`, {
+        variant: "error",
+      });
+          console.log(err)});
     }
   }
 

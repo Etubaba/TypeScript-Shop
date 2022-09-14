@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { productDetails } from '../features/shopSlice'
 import { RootState } from '../features/store'
 import { BASE_URL } from '../json/api'
+import { useSnackbar } from 'notistack';
 
 type shopstuffs = {
   _id: string,
@@ -23,11 +24,14 @@ const Card = ({ _id, productName, image, price }: shopstuffs) => {
   const user = useSelector((state: RootState) => state.shop.userData)
   const navigate = useNavigate()
   const dispatch=useDispatch()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 
   const addToCart = (): void => {
     if (user === null) {
-      alert("Please login to add to cart");
+      enqueueSnackbar("Login to add to cart", {
+        variant: "error",
+      });
       navigate('/login')
     } else {
       const data = {
@@ -37,9 +41,15 @@ const Card = ({ _id, productName, image, price }: shopstuffs) => {
       axios.post(`${BASE_URL}create/cart`, data)
         .then(res => {
           if (res.data.status) {
-            alert('item added to cart successfully')
+             enqueueSnackbar(`${productName} added to your cart`, {
+        variant: "success",
+      });
 
           }
+        }).catch(err => {
+           enqueueSnackbar("Something went wrong. Please try again", {
+        variant: "error",
+      });
         })
     }
 
