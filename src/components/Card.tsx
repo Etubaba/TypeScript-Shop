@@ -54,6 +54,8 @@ const Card = ({ _id, productName, image, price }: shopstuffs) => {
     }
 
   }
+
+
   return (
     <div key={_id} className="bg-[#2B3039] p-3  rounded-lg w-full cursor-pointer">
       <img
